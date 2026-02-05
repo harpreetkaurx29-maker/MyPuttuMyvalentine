@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+        background: url('https://pixabay.com/get/gf632c6eb7a6c97aa2d0e6d0d97c6b1bbabef0a1d0b6c7f7e2d0d9eebf6a0f0c9_1920.jpg') no-repeat center center/cover;
+        color: white;
+        text-shadow: 2px 2px 8px #000;
+        overflow: hidden;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 50px;
+        margin-bottom: 30px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        margin: 15px;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background-color: #ff4d6d;
+        color: white;
+        z-index: 2;
+    }
+
+    #noBtn {
+        background-color: #6c757d;
+        color: white;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 20px;
+        animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+        0% {transform: translateY(100vh) scale(1);}
+        100% {transform: translateY(-10vh) scale(1.5);}
+    }
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Will You Be My Valentine? 💖</h1>
+
+<button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
+<button id="noBtn" onmouseover="moveButton()">No 😢</button>
+
+<script>
+// Function for Yes button click
+function yesClicked() {
+    document.body.innerHTML = `
+        <h1>Yayyyyy ❤️🥰</h1>
+        <h2>You made my day!</h2>
+        <p style="font-size:24px;">🎵 Music forever in your heart! 🎵</p>
+    `;
+    createConfetti();
+}
+
+// Function for No button hover
+function moveButton() {
+    let button = document.getElementById("noBtn");
+    let x = Math.random() * (window.innerWidth - button.offsetWidth);
+    let y = Math.random() * (window.innerHeight - button.offsetHeight);
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+// Create floating hearts
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (10 + Math.random() * 30) + 'px';
+    heart.innerHTML = '❤️';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+
+// Create continuous hearts
+setInterval(createHeart, 300);
+
+// Confetti when Yes clicked
+function createConfetti() {
+    for(let i=0; i<100; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'absolute';
+        confetti.style.width = confetti.style.height = Math.random()*10 + 5 + 'px';
+        confetti.style.backgroundColor = ['#ff4d6d','#ffb3c1','#fff','#ff6699'][Math.floor(Math.random()*4)];
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = Math.random() * window.innerHeight + 'px';
+        confetti.style.opacity = Math.random();
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
+
